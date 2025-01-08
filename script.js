@@ -21,3 +21,5 @@ function operate (operator, a, b) {
             return "";
     };
 };
+
+const numbers = document.querySelectorAll(".number");
