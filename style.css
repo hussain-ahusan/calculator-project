@@ -53,6 +53,10 @@ input {
     margin: 1rem;
 }
 
+input[type="text"] {
+    font-size: 30px;
+}
+
 .numbers-operators{
     width: 29rem;
     height: 26rem;
