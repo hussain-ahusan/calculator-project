@@ -21,5 +21,10 @@ function operate (operator, a, b) {
             return "";
     };
 };
-
+const input = document.querySelector('input');
 const numbers = document.querySelectorAll(".number");
+numbers.forEach((number) => {
+    number.addEventListener('click', (e) => {
+        input.value = e.target.textContent;
+    })
+});
