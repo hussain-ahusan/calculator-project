@@ -4,17 +4,6 @@ clear.addEventListener('click', () => {
     input.value = "";
 });
 
-
-function updateDisplay () {
-    const input = document.querySelector('input');
-    const buttons = document.querySelectorAll(".number, .opr");
-    buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        input.value += e.target.textContent;
-    })
-})
-};
-
 function updateDisplay(){
     const operators = document.querySelectorAll('.opr')
     const numbers = document.querySelectorAll('.number')
@@ -39,12 +28,10 @@ function operate (operator, num1, num2) {
     num1 = parseInt(input.split(/[*]|[-]|[+]|[\/]/)
     .splice(0, 1)
     .join());
-    console.log(num1);
     num2 = parseInt(input.split(/[*]|[-]|[+]|[\/]/)
     .splice(-1)
     .join());
-    console.log(num2);
-    operator = input.split(/[^-|+|*|\/]/)
+    operator = input.split(/[^-|+|*|\/|%]/)
     .filter(e => e)
     .join();
     console.log(operator)
@@ -56,8 +43,8 @@ function operate (operator, num1, num2) {
         return num1 * num2
     } else if (operator == '/') {
         return num1 / num2
-    } else if (operator == '%') {
-        return (num1- num2) / num1 * 100
+    } else if(operator == '%'){
+        return num1 / 100;
     } else {
         return 0;
     };
