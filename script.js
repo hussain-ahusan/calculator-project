@@ -1,9 +1,3 @@
-const clear = document.querySelector('.AC');
-clear.addEventListener('click', () => {
-    const input = document.querySelector('input');
-    input.value = "";
-});
-
 function updateDisplay(){
     const operators = document.querySelectorAll('.opr');
     const numbers = document.querySelectorAll('.number');
@@ -21,14 +15,15 @@ function updateDisplay(){
             input.value += e.target.textContent;
         });
     });
+    keyboardSupport()
 };
 
-function operate (operator, num1, num2) {
+function operation (operator, num1, num2) {
     const input = document.querySelector('input').value;
-    num1 = parseInt(input.split(/[*]|[-]|[+]|[\/]/)
+    num1 = parseFloat(input.split(/[*]|[-]|[+]|[\/]/)
     .splice(0, 1)
     .join());
-    num2 = parseInt(input.split(/[*]|[-]|[+]|[\/]/)
+    num2 = parseFloat(input.split(/[*]|[-]|[+]|[\/]/)
     .splice(-1)
     .join());
     operator = input.split(/[^-|+|*|\/|%]/)
@@ -41,24 +36,63 @@ function operate (operator, num1, num2) {
     } else if (operator == '*') {
         return num1 * num2
     } else if (operator == '/') {
-        return num1 / num2
+        if (num2 === 0) return "Woah!";
+        let ans = num1 / num2; 
+        return Math.round(ans * 10 ** 2) / 10 ** 2;
     } else if(operator == '%'){
         return num1 / 100;
     } else {
-        return 0;
+        return 'Single pair of numbers only!';
     };
 };
 
+function operate () {
+    const equal = document.querySelector('.equal');
+    equal.addEventListener('click', () => {
+        const input = document.querySelector('input');
+        input.value = operation();
+    });
+};
 
-const equal = document.querySelector('.equal');
-equal.addEventListener('click', () => {
-    const input = document.querySelector('input');
-    input.value = operate();
-});
+function eraser () {
+    const erase = document.querySelector('.C');
+    erase.addEventListener('click', (e) => {
+        const input = document.querySelector('input');
+        input.value = input.value.slice(0, -1);
+    });
+}
 
-const erase = document.querySelector('.C');
-erase.addEventListener('click', (e) => {
+function allClear (){
+    const clear = document.querySelector('.AC');
     const input = document.querySelector('input');
-    input.value = input.value.slice(0, -1);
-});
-updateDisplay()
+    clear.addEventListener('click', () => {
+        input.value = "";
+    });
+};
+function keyboardSupport(){
+    document.addEventListener('keydown', (e) => {
+        const input = document.querySelector('input');
+        if (e.location !== 3) return; //stop firing if not numpad
+        input.value += e.key;
+        if (e.key === 'Enter') {
+            input.value += "" //dont input key name
+            input.value = operation();
+        };
+        if (e.key === 'Insert') return 0;
+        //if numlock is inactive, don't accept
+        if ((e.key === 'End')
+            ||(e.key === 'ArrowDown')
+            ||(e.key === 'PageDown')
+            ||(e.key === 'ArrowLeft')
+            ||(e.key === 'Clear')
+            ||(e.key === 'ArrowRight')
+            ||(e.key === 'Home')
+            ||(e.key === 'ArrowUp')
+            ||(e.key === 'PageUp')
+        ){return};
+    });
+};
+updateDisplay();
+eraser();
+allClear();
+operate()
