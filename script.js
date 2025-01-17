@@ -15,7 +15,6 @@ function updateDisplay(){
             input.value += e.target.textContent;
         });
     });
-    keyboardSupport()
 };
 
 function operation (operator, num1, num2) {
@@ -69,17 +68,10 @@ function allClear (){
         input.value = "";
     });
 };
-function keyboardSupport(){
+function numpad (){
     document.addEventListener('keydown', (e) => {
         const input = document.querySelector('input');
-        if (e.location !== 3) return; //stop firing if not numpad
-        input.value += e.key;
-        if (e.key === 'Enter') {
-            input.value += "" //dont input key name
-            input.value = operation();
-        };
-        if (e.key === 'Insert') return 0;
-        //if numlock is inactive, don't accept
+        //if numlock is inactive, don't input
         if ((e.key === 'End')
             ||(e.key === 'ArrowDown')
             ||(e.key === 'PageDown')
@@ -90,8 +82,16 @@ function keyboardSupport(){
             ||(e.key === 'ArrowUp')
             ||(e.key === 'PageUp')
         ){return};
+        if (e.location !== 3) return; //stop firing if not numpad
+        if (e.key === 'Insert') return 0;
+        input.value += e.key;
+        if (e.key === 'Enter') {
+            input.value += "" //dont input key name
+            input.value = operation();
+        };
     });
 };
+numpad();
 updateDisplay();
 eraser();
 allClear();
