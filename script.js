@@ -68,7 +68,7 @@ function allClear (){
         input.value = "";
     });
 };
-function numpad (){
+function keyboardSupport (){
     document.addEventListener('keydown', (e) => {
         const input = document.querySelector('input');
         //if numlock is inactive, don't input
@@ -82,6 +82,12 @@ function numpad (){
             ||(e.key === 'ArrowUp')
             ||(e.key === 'PageUp')
         ){return};
+        if(e.key === 'Escape') {
+            return input.value = ''
+        }
+        if (e.key === 'Backspace') {
+            input.value = input.value.slice(0, -1)
+        }
         if (e.location !== 3) return; //stop firing if not numpad
         if (e.key === 'Insert') return 0;
         input.value += e.key;
@@ -91,7 +97,7 @@ function numpad (){
         };
     });
 };
-numpad();
+keyboardSupport();
 updateDisplay();
 eraser();
 allClear();
