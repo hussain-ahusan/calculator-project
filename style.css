@@ -66,7 +66,7 @@ body {
     background: rgb(162, 187, 207);
     border: solid 5px black;
     border-radius: 10px;
-    height: 50rem;
+    height: 47rem;
     width: 25rem;
     display: flex;
     flex-direction: column;
@@ -104,11 +104,11 @@ body {
 }
 
 .number, .opr {
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     border: 2px solid black;
     border-radius: 40px;
-    margin: 1px;
+    margin: 6px;
     font-size: 2.2ch;
     font-weight: bold;
 }
@@ -134,7 +134,7 @@ button:hover {
     padding: 2em;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
