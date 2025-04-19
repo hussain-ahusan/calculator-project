@@ -129,7 +129,6 @@ button:hover {
     background: rgb(18, 170, 204);
 }
 .numbers {
-    border: 2px solid rgb(255, 255, 255);
     height: 60%;
     width: 100%;
     padding: 2em;
@@ -140,7 +139,6 @@ button:hover {
 }
 
 .operators {
-    border: 2px solid white;
     display: flex;
     flex-direction: column;
     align-items: center;
